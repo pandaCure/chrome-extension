@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    // "forceConsistentCasingInFileNames": true,
+    "target": "es2018",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["packages/**/*"],
+  "exclude": ["node_modules"]
+}

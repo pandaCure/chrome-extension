@@ -1,0 +1,30 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@option-src/*": [
+        "./option-src/*"
+      ],
+      "@option-components/*": [
+        "./option-src/components/*"
+      ],
+      "@popup-src/*": [
+        "./popup-src/*"
+      ],
+      "@popup-components/*": [
+        "./popup-src/components/*"
+      ],
+      "@theme-src/*": [
+        "./theme-src/*"
+      ],
+      "@theme-components/*": [
+        "./theme-src/components/*"
+      ],
+      // "@content-components/*": [
+      //   "./chorme-runtime/content/app/src/components/*"
+      // ]
+    }
+  },
+  "include": ["./option-src/**/*", "./popup-src/**/*", "./theme-src/**/*"]
+}
