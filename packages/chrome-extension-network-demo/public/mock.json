@@ -1,0 +1,26 @@
+[
+  {
+    "id": 5,
+    "priority": 5,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "queryTransform": {
+            "addOrReplaceParams": [
+              {
+                "key": "wd",
+                "replaceOnly": true,
+                "value": "我来看看"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "*^sugrec*",
+      "resourceTypes": ["xmlhttprequest"]
+    }
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "priority": 10,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        { "header": "Accept-Encoding", "operation": "remove" },
+        { "header": "Accept-Language", "operation": "set", "value": "en;q=0.8" },
+        { "header": "x-env-tt", "operation": "set", "value": "test" }
+      ]
+    },
+    "condition": { "urlFilter": "*^sugrec*", "domains": ["||baidu.com"], "resourceTypes": ["xmlhttprequest"] }
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "id": 9,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": { "urlFilter": "||bdstatic.com", "resourceTypes": ["stylesheet"] }
+  }
+]
