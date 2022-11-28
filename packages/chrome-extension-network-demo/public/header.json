@@ -10,6 +10,6 @@
         { "header": "x-env-tt", "operation": "set", "value": "test" }
       ]
     },
-    "condition": { "urlFilter": "*^sugrec*", "domains": ["||baidu.com"], "resourceTypes": ["xmlhttprequest"] }
+    "condition": { "urlFilter": "*^sugrec*", "domains": ["baidu.com"], "resourceTypes": ["xmlhttprequest"] }
   }
 ]

@@ -1,0 +1,21 @@
+{
+  "name": "options-page-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack serve -c ./webpack.config.js --progress --color --hot --open",
+    "dev:content": "cross-env NODE_ENV=development webpack serve -c ./webpack.config.chrome.js --progress --color --hot --open",
+    "build": "pnpm run ui && pnpm run runtime",
+    "ui": "cross-env NODE_ENV=production webpack",
+    "runtime": "cross-env NODE_ENV=production webpack -c ./webpack.config.chrome.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "not dead"
+  ]
+}

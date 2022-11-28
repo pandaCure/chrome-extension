@@ -20,6 +20,7 @@
     },
     "condition": {
       "urlFilter": "*^sugrec*",
+      "domains": ["baidu.com"],
       "resourceTypes": ["xmlhttprequest"]
     }
   }
