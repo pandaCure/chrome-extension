@@ -34,7 +34,7 @@
         "./sidebar-src/components/*"
       ],
       // "@content-components/*": [
-      //   "./chorme-runtime/content/app/src/components/*"
+      //   "./chrome-runtime/content/app/src/components/*"
       // ]
     }
   },

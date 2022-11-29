@@ -17,10 +17,13 @@ const App = () => {
     }
   };
   useEffect(() => {
-    chrome.storage.sync.get((result) => {
-      setOptions(Array.from(new Set([...get(result, 'lane', []), ...laneDefault])));
-      form.setFieldValue('lane', get(result, 'lane', []));
-    });
+    if (process.env.NODE_ENV === 'production') {
+      chrome.storage.sync.get((result) => {
+        const lane = get(result, 'lane', []);
+        setOptions(Array.from(new Set([...(Array.isArray(lane) ? lane : [lane]), ...laneDefault])));
+        form.setFieldValue('lane', lane);
+      });
+    }
   }, []);
   const handleSave = () => {
     form.validate().then(() => {
@@ -31,6 +34,16 @@ const App = () => {
       });
     });
   };
+  const handleFromChange = (field: any) => {
+    if (field.env) {
+      form.resetFields('lane')
+      setOptions(prev => prev.map(v => {
+        const newV = v.split('_').slice(1)
+        newV.unshift(field.env)
+        return newV.join("_")
+      }))
+    }
+  };
   return (
     <div className="rounded-sm shadow-md flex justify-center p-6 pt-0">
       <Card title="定制" style={{ width: '500px' }}>
@@ -40,6 +53,7 @@ const App = () => {
           labelCol={{
             span: 3,
           }}
+          onChange={handleFromChange}
         >
           <Form.Item label="环境" field="env" required>
             <Radio.Group>

@@ -34,6 +34,6 @@ output_resource/
 !.vscode/settings.json
 !.vscode/extensions.json
 .idea/
-chorme-extension/
+chrome-extension/
 chrome-extension/
 .npmrc

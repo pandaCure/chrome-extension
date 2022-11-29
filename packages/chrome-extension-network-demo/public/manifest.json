@@ -1,12 +1,8 @@
 {
-  "name": "demo1",
+  "name": "chrome-extension-network-demo",
   "manifest_version": 3,
   "version": "1.0.0.0",
   "options_page": "options.html",
-  "_options_ui": {
-    "page": "options.html",
-    "open_in_tab": false
-  },
   "declarative_net_request": {
     "rule_resources": [
       {
@@ -53,6 +49,7 @@
     "declarativeNetRequestWithHostAccess",
     "declarativeNetRequestFeedback",
     "nativeMessaging",
-    "tabs"
+    "tabs",
+    "activeTab"
   ]
 }
