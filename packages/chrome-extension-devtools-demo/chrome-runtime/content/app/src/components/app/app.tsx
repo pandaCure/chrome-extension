@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useLayoutEffect, useState } from 'react';
 import { Button } from '@arco-design/web-react';
 const App = () => {
@@ -17,11 +16,9 @@ const App = () => {
     );
   };
   useLayoutEffect(() => {
+    console.log('jianting')
     chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
-      console.log(`############`)
-      // Messages from content scripts should have sender.tab set
       if (request.from === 'devtools') {
-        console.log('I am here!');
         sendResponse({
           value: request.val1 + request.val2,
         });
@@ -29,9 +26,9 @@ const App = () => {
     });
   });
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-slate-500">
       <Button onClick={hanldeDevtoolsClick}>Devtools发消息</Button>
-      <div>{num}</div>
+      <Button>{num}</Button>
     </div>
   );
 };

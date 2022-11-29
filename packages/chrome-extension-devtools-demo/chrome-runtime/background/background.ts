@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 async function getCurrentTab() {
   let queryOptions = { active: true, lastFocusedWindow: true };
-  // `tab` will either be a `tabs.Tab` instance or `undefined`.
   let [tab] = await chrome.tabs.query(queryOptions);
   return tab;
 }
@@ -16,21 +15,14 @@ function injectScript(tab: any) {
   });
 }
 chrome.runtime.onMessage.addListener(async (request, _sender, sendResponse) => {
-  // Messages from content scripts should have sender.tab set
-  if (request.from === 'create') {
-    // console.log(request);
-    const tab = await getCurrentTab();
-    // console.log(tab);
-    await injectScript(tab);
-    sendResponse({
+  if (request.from === 'devtools') {
+    return sendResponse({
       status: 'success',
     });
-    return true;
-  } else if (request.from === 'devtools') {
-    console.log(request);
-    // const tab = await getCurrentTab()
-    // console.log(tab)
-    // await injectScript(tab)
+  }
+  if (request.from === 'create') {
+    const tab = await getCurrentTab();
+    await injectScript(tab);
     sendResponse({
       status: 'success',
     });

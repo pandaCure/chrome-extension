@@ -1,0 +1,40 @@
+{
+  "name": "demo1",
+  "manifest_version": 3,
+  "version": "1.0.0.0",
+  "options_page": "options.html",
+  "_options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "host_permissions": ["<all_urls>"],
+  "chrome_url_overrides": {
+    "newtab": "./theme.html"
+  },
+  "action": {
+    "default_popup": "./popup.html"
+  },
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "content_scripts": [
+    {
+      "js": ["./content.js"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "scripting",
+    "topSites",
+    "downloads",
+    "tabs",
+    "windows",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeNetRequestFeedback",
+    "nativeMessaging",
+    "tabs"
+  ],
+  "devtools_page": "devtools.html"
+}

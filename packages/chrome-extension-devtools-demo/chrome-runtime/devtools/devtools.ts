@@ -14,13 +14,17 @@ chrome.devtools.panels.create("Custom Panel",
     "",
     "devtools-panel.html",
     (panel) => {
-      // code invoked on panel creation
-      console.log(panel)
+      panel.onShown.addListener(() => {
+        chrome.runtime.sendMessage(
+          {
+            from: 'create',
+          }
+        );
+      })
     }
 );
 chrome.devtools.panels.elements.createSidebarPane("Custom Properties",
   (sidebar) => {
-    console.log(sidebar)
     sidebar.setPage("sidebar.html");
     sidebar.setHeight('100px')
   }

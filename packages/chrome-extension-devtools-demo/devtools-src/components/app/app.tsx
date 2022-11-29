@@ -16,15 +16,17 @@ const App = () => {
   const [num, setNum] = useState<undefined | number>();
   const [num1, setNum1] = useState<any>([]);
   const handleSendMessage = () => {
+    log('send info')
+    chrome.devtools.inspectedWindow.eval("window.alert(1)", () => {})
     chrome.runtime.sendMessage(
       {
-        from: 'create',
+        from: 'devtools',
         val1: 1,
         val2: 2,
       },
       (response) => {
-        // log('Received response ---->');
-        setNum(response);
+        log('Received response' + response);
+        setNum(response.value);
       },
     );
   };
@@ -44,23 +46,21 @@ const App = () => {
   };
   useLayoutEffect(() => {
     chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
-      // Messages from content scripts should have sender.tab set
       if (request.from === 'content') {
-        console.log('I am here!');
         sendResponse({
           value: request.val1 + request.val2,
         });
       }
     });
-    // Create a connection to the background page
-    let backgroundPageConnection = chrome.runtime.connect({
-      name: 'panel',
-    });
+    // // Create a connection to the background page
+    // let backgroundPageConnection = chrome.runtime.connect({
+    //   name: 'panel',
+    // });
 
-    backgroundPageConnection.postMessage({
-      name: 'init',
-      tabId: chrome.devtools.inspectedWindow.tabId,
-    });
+    // backgroundPageConnection.postMessage({
+    //   name: 'init',
+    //   tabId: chrome.devtools.inspectedWindow.tabId,
+    // });
   });
   const handleClick = (v: any) => {
     chrome.devtools.inspectedWindow.eval(`inspect(window.getElement(${v.id}))`, (result: any, isException) => {

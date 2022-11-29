@@ -35,10 +35,10 @@ const App = () => {
     <div className="flex flex-col">
       <Button onClick={handleSendBackgroundMessage}>Background通信</Button>
       <Button onClick={handleSendPopupMessage}>Popup通信</Button>
-      <div>
+      <div className="text-fuchsia-700">
         计算1+2=<span>{num}</span>
       </div>
-      <div>
+      <div className="text-yellow-600">
         计算3+5=<span>{num1}</span>
       </div>
     </div>

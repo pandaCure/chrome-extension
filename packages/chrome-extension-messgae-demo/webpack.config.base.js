@@ -155,6 +155,7 @@ const getWebpackBaseConfig = ({ isNoExtractCss }) => ({
                     ident: 'postcss',
                     config: false,
                     plugins: [
+                      'postcss-import',
                       'tailwindcss',
                       'postcss-flexbugs-fixes',
                       [
