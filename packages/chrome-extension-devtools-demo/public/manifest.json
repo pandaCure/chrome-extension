@@ -1,5 +1,5 @@
 {
-  "name": "demo1",
+  "name": "chrome-extension-devtools-demo",
   "manifest_version": 3,
   "version": "1.0.0.0",
   "options_page": "options.html",
@@ -36,5 +36,11 @@
     "nativeMessaging",
     "tabs"
   ],
-  "devtools_page": "devtools.html"
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["*"]
+    }
+  ]
 }

@@ -1,4 +1,15 @@
 /* eslint-disable no-undef */
+const log = (v: any) => {
+  chrome.runtime.sendMessage(
+    {
+      from: 'devtools',
+      log: v
+    },
+    (response) => {
+      console.log('Received response', response);
+    },
+  );
+}
 chrome.devtools.panels.create("Custom Panel",
     "",
     "devtools-panel.html",
@@ -14,13 +25,3 @@ chrome.devtools.panels.elements.createSidebarPane("Custom Properties",
     sidebar.setHeight('100px')
   }
 );
-// Create a connection to the background service worker
-const backgroundPageConnection = chrome.runtime.connect({
-  name: "devtools-page"
-});
-
-// Relay the tab ID to the background service worker
-backgroundPageConnection.postMessage({
-  name: 'init',
-  tabId: chrome.devtools.inspectedWindow.tabId
-});

@@ -1,23 +1,39 @@
 /* eslint-disable no-undef */
-let id = null;
-const connections = {};
-
-chrome.runtime.onConnect.addListener(devToolsConnection => {
-    // Assign the listener function to a variable so we can remove it later
-    let devToolsListener = (message, sender, sendResponse) => {
-      console.log('****************')
-        if (message.name == "init") {
-            id = message.tabId;
-            connections[id] = devToolsConnection;
-            // Send a message back to DevTools
-            connections[id].postMessage("Connected!");
-        }
-    };
-
-    // Listen to messages sent from the DevTools page
-    devToolsConnection.onMessage.addListener(devToolsListener);
-
-    devToolsConnection.onDisconnect.addListener(() => {
-        devToolsConnection.onMessage.removeListener(devToolsListener);
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}
+function injectScript(tab: any) {
+  return new Promise((resolve) => {
+    chrome.scripting.executeScript(
+      { files: ['./content-js/inject.js'], target: { tabId: tab.id!, allFrames: true } },
+      (a) => {
+        resolve(a);
+      },
+    );
+  });
+}
+chrome.runtime.onMessage.addListener(async (request, _sender, sendResponse) => {
+  // Messages from content scripts should have sender.tab set
+  if (request.from === 'create') {
+    // console.log(request);
+    const tab = await getCurrentTab();
+    // console.log(tab);
+    await injectScript(tab);
+    sendResponse({
+      status: 'success',
     });
+    return true;
+  } else if (request.from === 'devtools') {
+    console.log(request);
+    // const tab = await getCurrentTab()
+    // console.log(tab)
+    // await injectScript(tab)
+    sendResponse({
+      status: 'success',
+    });
+    return true;
+  }
 });

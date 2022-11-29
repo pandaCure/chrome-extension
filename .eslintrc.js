@@ -5,11 +5,12 @@ module.exports = {
       'alloy/typescript',
     ],
     env: {
-
+      "webextensions": true
     },
     globals: {
 
     },
     rules: {
+
     },
   };
